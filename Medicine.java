@@ -1,4 +1,7 @@
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Medicine implements Serializable {
     protected String MedName;
@@ -48,7 +51,12 @@ public class Medicine implements Serializable {
     }
 
     public void setMedType(String medType) {
-        this.MedType = medType;
+        if (medType =="analgesics"||medType =="antibiotic"||medType =="drops"||medType =="inhaler"||medType =="injection"||medType =="overthecounter"){
+            this.MedType = medType;
+        }else{
+            System.out.println("Invalid Medicine Type");
+        }
+        
     }
 
     public void setDosage(String dosage) {
@@ -60,7 +68,14 @@ public class Medicine implements Serializable {
     }
 
     public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate.parse(expiryDate, formatter);
+            this.expiryDate = expiryDate; 
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Use yyyy-MM-dd.");
+            this.expiryDate = null;
+        }
     }
 
     public void setQuantity(int quantity) {
@@ -78,10 +93,14 @@ public class Medicine implements Serializable {
     }
 
     public void addQuantity(int value) {
-        if (value > 0) {
+        if (value >= 1 && value <= 1000) {
             this.quantity += value;
-        } else {
-            System.out.println(value + " units cannot be added");
+        } else if( value > 1000) {
+            System.out.println("Units cannot Exceed 1000");
+        }else if (value<0){
+            System.out.println("Negative Value not allowed");
+        }else{
+            System.out.println("Invalid Input , Enter A whole Number !");
         }
     }
 
@@ -90,7 +109,6 @@ public class Medicine implements Serializable {
             System.out.println("Amount to dispense exceeds availability; only can dispense " + this.quantity + " units");
             System.out.print("Do you want to dispense maximum available ?[Y/N] : ");
         
-        // Use try-with-resources to ensure the scanner is closed
             try (java.util.Scanner scanner = new java.util.Scanner(System.in)) {
             String userIn = scanner.nextLine();
                 if (userIn.equalsIgnoreCase("Y")) {

@@ -5,20 +5,21 @@ public class MainApp {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+
     public static void uiAddNewMedicine() {
         System.out.println("Enter the details for the new medicine");
         System.out.print("Enter Medicine Type: ");
-        String medType = scanner.nextLine();
+        String medType = scanner.nextLine().trim();
         System.out.print("Enter Medicine Name: ");
-        String medName = scanner.nextLine();
+        String medName = scanner.nextLine().trim();
         System.out.print("Enter Dosage: ");
-        String dosage = scanner.nextLine();
+        String dosage = scanner.nextLine().trim();
         System.out.print("Enter Manufacturer: ");
-        String manufacturer = scanner.nextLine();
+        String manufacturer = scanner.nextLine().trim();
         System.out.print("Enter Expiry Date: ");
-        String expDate = scanner.nextLine();
+        String expDate = scanner.nextLine().trim();
         System.out.print("Enter Quantity: ");
-        String quantity = scanner.nextLine();
+        String quantity = scanner.nextLine().trim();
 
         String specific1, specific2;
         Medicine newMed;
@@ -52,17 +53,17 @@ public class MainApp {
     private static Medicine createNewMed(String medType, String medName, String dosage, String manufacturer, String expDate, String quantity, String... extra) {
         switch (medType.toLowerCase()) {
             case "antibiotic":
-                return new Antibiotic(medType, medName, dosage, manufacturer, expDate, quantity, extra[0], extra[1]);
+                return new Antibiotic("Antibiotic", medName, dosage, manufacturer, expDate, quantity, extra[0], extra[1]);
             case "analgesics":
-                return new Analgesics(medType, medName, dosage, manufacturer, expDate, quantity, extra[0], extra[1]);
+                return new Analgesics("Analgesics", medName, dosage, manufacturer, expDate, quantity, extra[0], extra[1]);
             case "drops":
-                return new Drops(medType, medName, dosage, manufacturer, expDate, quantity, extra[0], extra[1]);
+                return new Drops("Drops", medName, dosage, manufacturer, expDate, quantity, extra[0], extra[1]);
             case "injection":
-                return new Injection(medType, medName, dosage, manufacturer, expDate, quantity, extra[0], extra[1]);
+                return new Injection("Injection", medName, dosage, manufacturer, expDate, quantity, extra[0], extra[1]);
             case "inhaler":
-                return new Inhaler(medType, medName, dosage, manufacturer, expDate, quantity, extra[0]);
+                return new Inhaler("Inhaler", medName, dosage, manufacturer, expDate, quantity, extra[0]);
             case "overthecounter":
-                return new OverTheCounter(medType, medName, dosage, manufacturer, expDate, quantity, extra[0]);
+                return new OverTheCounter("OverTheCounter", medName, dosage, manufacturer, expDate, quantity, extra[0]);
             default:
                 return null;
         }
@@ -84,7 +85,7 @@ public class MainApp {
             try {
                 System.out.print("Select Option: ");
                 userIn = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
+                scanner.nextLine(); 
 
                 switch (userIn) {
                     case 1:
@@ -92,7 +93,7 @@ public class MainApp {
                         break;
                     case 2:
                         System.out.print("Enter Medicine to search: ");
-                        String searchMedName = scanner.nextLine();
+                        String searchMedName = scanner.nextLine().trim();
                         int searchIndex = Inventory.searchMed(searchMedName);
                         if (searchIndex == -1) {
                             System.out.println("The medicine does not exist in the inventory.");
