@@ -1,0 +1,30 @@
+Inhaler*Ventolin HFA*90 mcg/inhalation*GSK*2026-12-15*105?Rescue?
+Inhaler*Symbicort*160/4.5 mcg*AstraZeneca*2025-06-20*50?Combination?
+Inhaler*Advair Diskus*250/50 mcg*GSK*2026-09-10*40?Combination?
+Inhaler*Spiriva*18 mcg*Boehringer Ingelheim*2027-03-25*25?Maintenance?
+Inhaler*Dulera*200/5 mcg*Merck*2025-11-30*20?Combination?
+Antibiotic*Amoxicillin*500 mg capsule*GSK*2026-08-10*100?Broad?Moderate?
+Antibiotic*Azithromycin*250 mg tablet*Pfizer*2025-05-15*75?Broad?Low?
+Antibiotic*Ciprofloxacin*500 mg tablet*Bayer*2026-12-05*10?Broad?High?
+Antibiotic*Doxycycline*100 mg capsule*Pfizer*2025-10-28*60?Broad?Low?
+Antibiotic*Clindamycin*300 mg capsule*Pfizer*2025-09-22*30?Narrow?High?
+Analgesics*Paracetamol*500 mg tablet*GSK*2026-12-31*100?Mild?Mild?
+Analgesics*Ibuprofen*400 mg tablet*Pfizer*2025-08-15*100?Inflammatory?Inflammatory?
+Analgesics*Diclofenac*50 mg tablet*Novartis*2026-06-20*80?Musculoskeletal?Musculoskeletal?
+Analgesics*Tramadol*50 mg capsule*Sanofi*2027-09-10*50?Severe?Severe?
+Analgesics*Naproxen*500 mg tablet*Bayer*2026-07-25*60?Arthritis?Arthritis?
+Drops*Ciprofloxacin Drops*0.3% w/v*Alcon*2026-09-15*40?Ear?No?
+Drops*Moxifloxacin Drops*0.5% w/v*Novartis*2025-12-10*30?Eye?Yes?
+Drops*Brimonidine Drops*0.2% w/v*Allergan*2027-05-20*25?Eye?No?
+Drops*Timolol Drops*0.5% w/v*Pfizer*2026-08-05*35?Eye?No?
+Drops*Ofloxacin Drops*0.3% w/v*Sun Pharma*2025-07-18*40?Ear?No?
+Injection*Ceftriaxone*1g/vial*Roche*2026-11-20*100?Fast?Intravenous?
+Injection*Amikacin*500 mg/2 mL*Sun Pharma*2025-09-15*40?Moderate?Intramuscular?
+Injection*Gentamicin*80 mg/2 mL*Pfizer*2027-06-10*60?Moderate?Intramuscular?
+Injection*Diclofenac Sodium*75 mg/3 mL*Novartis*2026-07-05*90?Moderate?Intramuscular?
+Injection*Pantoprazole*40 mg/vial*Sanofi*2025-08-30*50?Fast?Intravenous?
+OverTheCounter*Diphenhydramine*25 mg capsule*Johnson & Johnson*2026-07-20*80?Allergy?
+OverTheCounter*Ranitidine*150 mg tablet*Sanofi*2025-08-30*90?Acid reflux?
+OverTheCounter*Omeprazole*20 mg capsule*AstraZeneca*2027-04-15*120?Acid reflux?
+OverTheCounter*Loperamide*2 mg capsule*Janssen*2026-10-25*75?Diarrhea relief?
+OverTheCounter*Vitamin C*500 mg tablet*Abbott*2025-12-10*180?Immune support?
