@@ -104,7 +104,7 @@ public class MainApp {
                         break;
                     case 3:
                         System.out.print("Enter Medicine to Dispense: ");
-                        String dispenseMedName = scanner.nextLine();
+                        String dispenseMedName = scanner.nextLine().trim();
                         int dispenseIndex = Inventory.searchMed(dispenseMedName);
                         if (dispenseIndex == -1) {
                             System.out.println("Medicine not found");
@@ -120,7 +120,7 @@ public class MainApp {
                         break;
                     case 4:
                         System.out.print("Enter Medicine to Add up: ");
-                        String addMedName = scanner.nextLine();
+                        String addMedName = scanner.nextLine().trim();
                         int addIndex = Inventory.searchMed(addMedName);
                         if (addIndex == -1) {
                             System.out.println("Medicine not found");
