@@ -32,7 +32,7 @@ public class MainApp {
                 specific1 = scanner.nextLine();
                 System.out.print("Enter specific2: ");
                 specific2 = scanner.nextLine();
-                newMed = createNewMed(medType, medName, dosage, manufacturer, expDate, quantity, specific1, specific2);
+                newMed = createNewMed(medType , medName, dosage, manufacturer, expDate, quantity, specific1, specific2);
                 break;
             case "inhaler":
             case "overthecounter":
