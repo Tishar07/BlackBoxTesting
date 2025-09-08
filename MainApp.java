@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -5,50 +8,124 @@ public class MainApp {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+public static void uiAddNewMedicine() {
+    System.out.println("Enter the details for the new medicine");
 
-    public static void uiAddNewMedicine() {
-        System.out.println("Enter the details for the new medicine");
-        System.out.print("Enter Medicine Type: ");
-        String medType = scanner.nextLine().trim();
-        System.out.print("Enter Medicine Name: ");
-        String medName = scanner.nextLine().trim();
-        System.out.print("Enter Dosage: ");
-        String dosage = scanner.nextLine().trim();
-        System.out.print("Enter Manufacturer: ");
-        String manufacturer = scanner.nextLine().trim();
-        System.out.print("Enter Expiry Date: ");
-        String expDate = scanner.nextLine().trim();
-        System.out.print("Enter Quantity: ");
-        String quantity = scanner.nextLine().trim();
+    System.out.print("Enter Medicine Type: ");
+    String medType = scanner.nextLine().trim().toLowerCase();
+    if (!(medType.equalsIgnoreCase("analgesics") || medType.equalsIgnoreCase("antibiotic") ||
+          medType.equalsIgnoreCase("drops") || medType.equalsIgnoreCase("inhaler") ||
+          medType.equalsIgnoreCase("injection") || medType.equalsIgnoreCase("overthecounter"))) {
+            System.out.println("Invalid Type !");
+            return;
+          }
 
-        String specific1, specific2;
-        Medicine newMed;
 
-        switch (medType.toLowerCase()) {
-            case "antibiotic":
-            case "analgesics":
-            case "drops": 
-            case "injection":
-                System.out.print("Enter specific1: ");
-                specific1 = scanner.nextLine();
-                System.out.print("Enter specific2: ");
-                specific2 = scanner.nextLine();
-                newMed = createNewMed(medType , medName, dosage, manufacturer, expDate, quantity, specific1, specific2);
-                break;
-            case "inhaler":
-            case "overthecounter":
-                System.out.print("Enter specific1: ");
-                specific1 = scanner.nextLine();
-                newMed = createNewMed(medType, medName, dosage, manufacturer, expDate, quantity, specific1);
-                break;
-            default:
-                System.out.println("Invalid medicine type.");
-                return;
-        }
-
-        Inventory.addMedToList(newMed);
-        System.out.println(medName + " has been added in the inventory");
+    // Medicine Name
+    System.out.print("Enter Medicine Name: ");
+    String medName = scanner.nextLine().trim();
+    if (medName.isEmpty() || medName.length() > 25) {
+        System.out.println("Invalid Medicine name: must be 1-25 characters long");
+        return;
     }
+
+    // Dosage
+    System.out.print("Enter Dosage: ");
+    String dosage = scanner.nextLine().trim();
+    Integer numberPart = Integer.parseInt(dosage.replaceAll("[^0-9]", "").trim());
+    if (dosage.isEmpty()) {
+        System.out.println("Invalid Dosage: cannot be empty");
+        return;
+    }else if(numberPart >2000 && numberPart < 0){
+        System.out.println("Invalid Dosage amount(1-2000)");
+        return;
+    }else if (dosage.matches("^\\d+\\s*[a-zA-Z]+$")== false) {
+        System.out.println("Dosage must always start with integer value then metric !");
+        return;
+    }
+
+    // Manufacturer
+    System.out.print("Enter Manufacturer: ");
+    String manufacturer = scanner.nextLine().trim();
+    if (manufacturer.isEmpty() || manufacturer.length() > 20) {
+        System.out.println("Invalid Manufacturer: must be 1-20 characters long");
+        return;
+    }
+
+    // Expiry Date
+    System.out.print("Enter Expiry Date (yyyy-MM-dd): ");
+    String expDate = scanner.nextLine().trim();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    try {
+        LocalDate.parse(expDate, formatter);
+    } catch (DateTimeParseException e) {
+        System.out.println("Invalid date format. Use yyyy-MM-dd.");
+        return;
+    }
+
+    // Quantity
+    System.out.print("Enter Quantity: ");
+    String quantityStr = scanner.nextLine().trim();
+    int quantity;
+    try {
+        quantity = Integer.parseInt(quantityStr);
+        if (quantity <= 0 || quantity > 10000) {
+            System.out.println("Invalid Quantity: must be between 1 and 10000");
+            return;
+        }
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid Quantity: not a valid integer");
+        return;
+    }
+
+    String specific1, specific2;
+    Medicine newMed;
+
+    switch (medType.toLowerCase()) {
+        case "antibiotic":
+        case "analgesics":
+        case "drops":
+        case "injection":
+            // Specific1
+            System.out.print("Enter specific1 (alphabetic only): ");
+            specific1 = scanner.nextLine().trim();
+            if (!specific1.matches("[a-zA-Z]+")) {
+                System.out.println("Invalid input: specific1 must contain only letters");
+                return;
+            }
+
+            // Specific2
+            System.out.print("Enter specific2 (alphabetic only): ");
+            specific2 = scanner.nextLine().trim();
+            if (!specific2.matches("[a-zA-Z]+")) {
+                System.out.println("Invalid input: specific2 must contain only letters");
+                return;
+            }
+
+            newMed = createNewMed(medType, medName, dosage, manufacturer, expDate, String.valueOf(quantity), specific1, specific2);
+            break;
+
+        case "inhaler":
+        case "overthecounter":
+            System.out.print("Enter specific1 (alphabetic only): ");
+            specific1 = scanner.nextLine().trim();
+            if (!specific1.matches("[a-zA-Z]+")) {
+                System.out.println("Invalid input: specific1 must contain only letters");
+                return;
+            }
+            newMed = createNewMed(medType, medName, dosage, manufacturer, expDate, String.valueOf(quantity), specific1);
+            break;
+
+        default:
+            System.out.println("Invalid medicine type.");
+            return;
+    }
+
+    Inventory.addMedToList(newMed);
+    System.out.println("Medicine added successfully!");
+}
+
+
 
     private static Medicine createNewMed(String medType, String medName, String dosage, String manufacturer, String expDate, String quantity, String... extra) {
         switch (medType.toLowerCase()) {
@@ -110,12 +187,17 @@ public class MainApp {
                             System.out.println("Medicine not found");
                         } else {
                             Medicine med = Inventory.MedList.get(dispenseIndex);
+                            if (med.getQuantity()==0){
+                                System.out.println("No units to dispense !");
+                                break;
+                            }else{
                             System.out.println("Available : " + med.getQuantity() + " units");
                             System.out.print("Enter amount to dispense: ");
                             int amountToDispense = scanner.nextInt();
                             scanner.nextLine();
                             med.dispenseQuantity(amountToDispense);
-                            System.out.println("Updated after dispense units : " + med.getQuantity() + " units");
+                            System.out.println("Updated after dispense units : " + med.getQuantity() + " units");                                
+                            }
                         }
                         break;
                     case 4:
@@ -131,7 +213,7 @@ public class MainApp {
                             int amountToAdd = scanner.nextInt();
                             scanner.nextLine();
                             med.addQuantity(amountToAdd);
-                            System.out.println("Updated after add units : " + med.getQuantity() + " units");
+                            System.out.println("Available : " + med.getQuantity() + " units");
                         }
                         break;
                     case 5:
@@ -147,8 +229,8 @@ public class MainApp {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // Clear the invalid input from the scanner
-                userIn = 99; // Keep the loop running
+                scanner.nextLine();
+                userIn = 99; 
             }
         }
         scanner.close();

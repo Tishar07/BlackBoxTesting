@@ -1,7 +1,6 @@
 public class Antibiotic extends Medicine {
     private String spectrum;
     private String resistanceRisk;
-
     public Antibiotic(String medType, String medName, String dosage, String manufacturer, String expiryDate, String quantity, String spectrum, String resistanceRisk) {
         super(medType, medName, dosage, manufacturer, expiryDate, quantity);
         this.spectrum = spectrum;

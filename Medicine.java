@@ -1,7 +1,5 @@
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 
 public class Medicine implements Serializable {
     protected String MedName;
@@ -45,42 +43,6 @@ public class Medicine implements Serializable {
         return quantity;
     }
 
-    // Setters
-    public void setMedName(String medName) {
-        this.MedName = medName;
-    }
-
-    public void setMedType(String medType) {
-        if (medType =="analgesics"||medType =="antibiotic"||medType =="drops"||medType =="inhaler"||medType =="injection"||medType =="overthecounter"){
-            this.MedType = medType;
-        }else{
-            System.out.println("Invalid Medicine Type");
-        }
-        
-    }
-
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public void setExpiryDate(String expiryDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        try {
-            LocalDate.parse(expiryDate, formatter);
-            this.expiryDate = expiryDate; 
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format. Use yyyy-MM-dd.");
-            this.expiryDate = null;
-        }
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = Math.max(0, quantity);
-    }
 
     public void displayInfo() {
         System.out.println("Medicine Details");
@@ -93,11 +55,13 @@ public class Medicine implements Serializable {
     }
 
     public void addQuantity(int value) {
-        if (value >= 1 && value <= 1000) {
+        if (value >= 50 && value <= 1000) {
             this.quantity += value;
         } else if( value > 1000) {
-            System.out.println("Units cannot Exceed 1000");
-        }else if (value<0){
+            System.out.println("Value to add cannot Exceed 1000 !");
+        }else if (value < 50){
+            System.out.println("Value to add cannot be less than 50 !");
+        }else if( value <0){
             System.out.println("Negative Value not allowed");
         }else{
             System.out.println("Invalid Input , Enter A whole Number !");
@@ -105,21 +69,22 @@ public class Medicine implements Serializable {
     }
 
     public void dispenseQuantity(int value) {
-        if (value > this.quantity) {
+        if (value > this.quantity && this.quantity !=0)  {
             System.out.println("Amount to dispense exceeds availability; only can dispense " + this.quantity + " units");
             System.out.print("Do you want to dispense maximum available ?[Y/N] : ");
-        
             try (java.util.Scanner scanner = new java.util.Scanner(System.in)) {
-            String userIn = scanner.nextLine();
+                String userIn = scanner.nextLine();
                 if (userIn.equalsIgnoreCase("Y")) {
                     this.quantity = 0;
                     System.out.println("Dispensed all available units. Remaining: 0");
                 } else {
                 System.out.println("Dispense operation terminated!");
+                }
             }
-        }
         } else {
-        this.quantity -= value;
+            this.quantity -= value;
     }
+    
+    
 }
 }
