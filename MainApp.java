@@ -24,25 +24,35 @@ public static void uiAddNewMedicine() {
     // Medicine Name
     System.out.print("Enter Medicine Name: ");
     String medName = scanner.nextLine().trim();
+    if (!(medName.matches("[a-zA-Z]+"))){
+        System.out.println("Invalid Input(Must be Alpabetic)");
+        return;
+    }
     if (medName.isEmpty() || medName.length() > 25) {
         System.out.println("Invalid Medicine name: must be 1-25 characters long");
         return;
     }
+    
 
     // Dosage
     System.out.print("Enter Dosage: ");
     String dosage = scanner.nextLine().trim();
-    Integer numberPart = Integer.parseInt(dosage.replaceAll("[^0-9]", "").trim());
+   
+    
     if (dosage.isEmpty()) {
         System.out.println("Invalid Dosage: cannot be empty");
         return;
-    }else if(numberPart >2000 && numberPart < 0){
-        System.out.println("Invalid Dosage amount(1-2000)");
-        return;
-    }else if (dosage.matches("^\\d+\\s*[a-zA-Z]+$")== false) {
+    }
+    if (!(dosage.matches("^\\d+\\s*[a-zA-Z]+$"))) {
         System.out.println("Dosage must always start with integer value then metric !");
         return;
+    }    
+     Integer numberPart = Integer.parseInt(dosage.replaceAll("[^0-9]", "").trim());
+    if(numberPart >2000 || numberPart < 1){
+        System.out.println("Invalid Dosage amount(1-2000)");
+        return;
     }
+
 
     // Manufacturer
     System.out.print("Enter Manufacturer: ");
