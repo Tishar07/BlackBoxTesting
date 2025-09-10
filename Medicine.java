@@ -81,8 +81,8 @@ public class Medicine implements Serializable {
                 System.out.println("Dispense operation terminated!");
                 }
             }
-        } else if(value <0) {
-            System.out.println("Value to dispense cannot be Negative !");
+        } else if(value <=0  ) {
+            System.out.println("Value to dispense cannot be Negative or Zero !");
         }else{
         this.quantity -= value;
         }
