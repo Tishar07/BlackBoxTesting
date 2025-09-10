@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Scanner;
 
 
 public class Medicine implements Serializable {
@@ -67,12 +68,11 @@ public class Medicine implements Serializable {
             System.out.println("Invalid Input , Enter A whole Number !");
         }
     }
-
+    private static final Scanner scanner = new Scanner(System.in);
     public void dispenseQuantity(int value) {
         if (value > this.quantity && this.quantity !=0)  {
             System.out.println("Amount to dispense exceeds availability; only can dispense " + this.quantity + " units");
             System.out.print("Do you want to dispense maximum available ?[Y/N] : ");
-            try (java.util.Scanner scanner = new java.util.Scanner(System.in)) {
                 String userIn = scanner.nextLine();
                 if (userIn.equalsIgnoreCase("Y")) {
                     this.quantity = 0;
@@ -80,13 +80,11 @@ public class Medicine implements Serializable {
                 } else {
                 System.out.println("Dispense operation terminated!");
                 }
-            }
         } else if(value <=0  ) {
             System.out.println("Value to dispense cannot be Negative or Zero !");
         }else{
         this.quantity -= value;
         }
-    
-    
-}
+        
+    }
 }
