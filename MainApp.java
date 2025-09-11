@@ -188,6 +188,7 @@ public static void uiAddNewMedicine() {
                         String searchMedName = scanner.nextLine().trim();
                         int searchIndex = Inventory.searchMed(searchMedName);
                         if (searchIndex ==0 ){
+                            System.out.println("Invalid Input , Alphanetics Only !");
                             break;
                         }
                         if (searchIndex == -1) {
@@ -201,22 +202,29 @@ public static void uiAddNewMedicine() {
                         System.out.print("Enter Medicine to Dispense: ");
                         String dispenseMedName = scanner.nextLine().trim();
                         int dispenseIndex = Inventory.searchMed(dispenseMedName);
+                        if (dispenseIndex ==0 ){
+                            break;
+                        }
                         if (dispenseIndex == -1) {
-                            System.out.println("Medicine not found");
+                            System.out.println("The medicine does not exist in the inventory.");
                         } else {
                             Medicine med = Inventory.MedList.get(dispenseIndex);
                             if (med.getQuantity()==0){
                                 System.out.println("No units to dispense !");
                                 break;
-                            }else{
+                            }
                             System.out.println("Available : " + med.getQuantity() + " units");
                             System.out.print("Enter amount to dispense: ");
                             int amountToDispense = scanner.nextInt();
                             scanner.nextLine();
                             med.dispenseQuantity(amountToDispense);
-                            System.out.println("Updated after dispense units : " + med.getQuantity() + " units");                                
-                            }
+                            System.out.println("Updated after dispense units : " + med.getQuantity() + " units");   
+
+                            
                         }
+                        
+                        
+                        
                         break;
                     case 4:
                         System.out.print("Enter Medicine to Add up: ");
