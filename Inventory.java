@@ -135,11 +135,16 @@ public class Inventory {
     }
 
     public static int searchMed(String medName) {
+        
+        if (medName == null || !medName.matches("[a-zA-Z]+")) {
+            System.out.println("Invalid Input (Must be Alphabetic)");
+            return 0; 
+        }
         for (int i = 0; i < MedList.size(); i++) {
             if (MedList.get(i).getMedName().equalsIgnoreCase(medName)) {
-                return i;
+                return i; 
             }
         }
-        return -1;
+        return -1; 
     }
 }

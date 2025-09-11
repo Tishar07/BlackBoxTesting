@@ -25,7 +25,7 @@ public static void uiAddNewMedicine() {
     System.out.print("Enter Medicine Name: ");
     String medName = scanner.nextLine().trim();
     if (!(medName.matches("[a-zA-Z]+"))){
-        System.out.println("Invalid Input(Must be Alpabetic)");
+        System.out.println("Invalid Input(Must be Alphabetic)");
         return;
     }
     if (medName.isEmpty() || medName.length() > 25) {
@@ -61,11 +61,15 @@ public static void uiAddNewMedicine() {
         System.out.println("Invalid Manufacturer: must be 1-20 characters long");
         return;
     }
+    if (!(manufacturer.matches("[a-zA-Z+]"))){
+        System.out.println("Invalid type , Alphabetics Only !");
+    }
 
     // Expiry Date
     System.out.print("Enter Expiry Date (yyyy-MM-dd): ");
     String expDate = scanner.nextLine().trim();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    
     try {
         LocalDate.parse(expDate, formatter);
     } catch (DateTimeParseException e) {
@@ -77,6 +81,7 @@ public static void uiAddNewMedicine() {
     System.out.print("Enter Quantity: ");
     String quantityStr = scanner.nextLine().trim();
     int quantity;
+    
     try {
         quantity = Integer.parseInt(quantityStr);
         if (quantity <= 0 || quantity > 10000) {
@@ -99,16 +104,16 @@ public static void uiAddNewMedicine() {
             // Specific1
             System.out.print("Enter specific1 (alphabetic only): ");
             specific1 = scanner.nextLine().trim();
-            if (!specific1.matches("[a-zA-Z]+")) {
-                System.out.println("Invalid input: specific1 must contain only letters");
+            if (!(specific1.matches("[a-zA-Z]+"))) {
+                System.out.println("Invalid input: specific 1 must be alphabetic only");
                 return;
             }
 
             // Specific2
             System.out.print("Enter specific2 (alphabetic only): ");
             specific2 = scanner.nextLine().trim();
-            if (!specific2.matches("[a-zA-Z]+")) {
-                System.out.println("Invalid input: specific2 must contain only letters");
+            if (!(specific2.matches("[a-zA-Z]+"))) {
+                System.out.println("Invalid input: specific 2 must be alphabetic only");
                 return;
             }
 
@@ -119,8 +124,8 @@ public static void uiAddNewMedicine() {
         case "overthecounter":
             System.out.print("Enter specific1 (alphabetic only): ");
             specific1 = scanner.nextLine().trim();
-            if (!specific1.matches("[a-zA-Z]+")) {
-                System.out.println("Invalid input: specific1 must contain only letters");
+            if (!(specific1.matches("[a-zA-Z]+"))) {
+                System.out.println("Invalid input: specific 1 must be alphabetic only");
                 return;
             }
             newMed = createNewMed(medType, medName, dosage, manufacturer, expDate, String.valueOf(quantity), specific1);
@@ -182,6 +187,9 @@ public static void uiAddNewMedicine() {
                         System.out.print("Enter Medicine to search: ");
                         String searchMedName = scanner.nextLine().trim();
                         int searchIndex = Inventory.searchMed(searchMedName);
+                        if (searchIndex ==0 ){
+                            break;
+                        }
                         if (searchIndex == -1) {
                             System.out.println("The medicine does not exist in the inventory.");
                         } else {
