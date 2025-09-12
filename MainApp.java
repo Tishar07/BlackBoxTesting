@@ -61,7 +61,7 @@ public static void uiAddNewMedicine() {
         System.out.println("Invalid Manufacturer: must be 1-20 characters long");
         return;
     }
-    if (!(manufacturer.matches("[a-zA-Z+]"))){
+    if (!(manufacturer.matches("[a-zA-Z]+"))){
         System.out.println("Invalid type , Alphabetics Only !");
     }
 
