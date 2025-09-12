@@ -80,13 +80,10 @@ public static void uiAddNewMedicine() {
     try {
         LocalDate date = LocalDate.parse(expDate, formatter);
 
-        // Optional: reject past dates
         if (date.isBefore(LocalDate.now())) {
             System.out.println("Expiry date cannot be in the past.");
             return;
         }
-
-        System.out.println("Valid expiry date: " + date);
 
     } catch (DateTimeParseException e) {
         System.out.println("Invalid date. Please enter a real calendar date in yyyy-MM-dd format.");
