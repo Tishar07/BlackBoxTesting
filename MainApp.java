@@ -61,10 +61,6 @@ public static void uiAddNewMedicine() {
 
 
 
-
-
-
-
     // Manufacturer
     System.out.print("Enter Manufacturer: ");
     String manufacturer = scanner.nextLine().trim();
@@ -81,13 +77,28 @@ public static void uiAddNewMedicine() {
     System.out.print("Enter Expiry Date (yyyy-MM-dd): ");
     String expDate = scanner.nextLine().trim();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    
     try {
-        LocalDate.parse(expDate, formatter);
+        LocalDate date = LocalDate.parse(expDate, formatter);
+
+        // Optional: reject past dates
+        if (date.isBefore(LocalDate.now())) {
+            System.out.println("Expiry date cannot be in the past.");
+            return;
+        }
+
+        System.out.println("Valid expiry date: " + date);
+
     } catch (DateTimeParseException e) {
+        System.out.println("Invalid date. Please enter a real calendar date in yyyy-MM-dd format.");
+        return;
+    }
+    
+    if (!expDate.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
         System.out.println("Invalid date format. Use yyyy-MM-dd.");
         return;
     }
+
+    
 
     // Quantity
     System.out.print("Enter Quantity: ");
