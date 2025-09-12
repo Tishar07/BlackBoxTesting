@@ -37,21 +37,32 @@ public static void uiAddNewMedicine() {
     // Dosage
     System.out.print("Enter Dosage: ");
     String dosage = scanner.nextLine().trim();
-   
-    
+
     if (dosage.isEmpty()) {
         System.out.println("Invalid Dosage: cannot be empty");
         return;
     }
-    if (!(dosage.matches("^\\d+\\s*[a-zA-Z]+$"))) {
-        System.out.println("Dosage must always start with integer value then metric !");
-        return;
-    }    
-     Integer numberPart = Integer.parseInt(dosage.replaceAll("[^0-9]", "").trim());
-    if(numberPart >2000 || numberPart < 1){
-        System.out.println("Invalid Dosage amount(1-2000)");
+
+    // Regex: capture integer part and optional unit (letters)
+    if (!dosage.matches("^-?\\d+\\s*[a-zA-Z]*$")) {
+        System.out.println("Dosage must start with an integer (units optional)");
         return;
     }
+
+    // Extract just the number part (before any letters)
+    String numberStr = dosage.replaceAll("[^0-9-]", "").trim();
+    int numberPart = Integer.parseInt(numberStr);
+
+    if (numberPart < 1 || numberPart > 2000) {
+        System.out.println("Invalid Dosage amount (must be between 1-2000)");
+        return;
+    }
+
+
+
+
+
+
 
 
     // Manufacturer
