@@ -135,9 +135,12 @@ public class Inventory {
     }
 
     public static int searchMed(String medName) {
-        
-        if (medName == null || !medName.matches("[a-zA-Z]+")) {
-            System.out.println("Invalid Input (Must be Alphabetic)");
+        if (medName.isEmpty() || medName.length() > 25) {
+            System.out.println("Invalid Medicine name: must be 1-25 characters long");
+            return 0; 
+        }
+        if (!medName.matches("[a-zA-Z]+")) {
+            System.out.println("Invalid input (must be alphabetic)");
             return 0; 
         }
         for (int i = 0; i < MedList.size(); i++) {
@@ -147,4 +150,5 @@ public class Inventory {
         }
         return -1; 
     }
+
 }

@@ -188,7 +188,6 @@ public static void uiAddNewMedicine() {
                         String searchMedName = scanner.nextLine().trim();
                         int searchIndex = Inventory.searchMed(searchMedName);
                         if (searchIndex ==0 ){
-                            System.out.println("Invalid Input , Alphanetics Only !");
                             break;
                         }
                         if (searchIndex == -1) {
@@ -222,9 +221,6 @@ public static void uiAddNewMedicine() {
 
                             
                         }
-                        
-                        
-                        
                         break;
                     case 4:
                         System.out.print("Enter Medicine to Add up: ");
