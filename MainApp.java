@@ -74,6 +74,7 @@ public static void uiAddNewMedicine() {
     }
     if (!(manufacturer.matches("[a-zA-Z]+"))){
         System.out.println("Invalid type , Alphabetics Only !");
+        return;
     }
 
     // Expiry Date
