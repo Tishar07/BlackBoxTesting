@@ -24,7 +24,8 @@ public static void uiAddNewMedicine() {
     // Medicine Name
     System.out.print("Enter Medicine Name: ");
     String medName = scanner.nextLine().trim();
-    if (!(medName.matches("[a-zA-Z]+"))){
+
+    if (!(medName.matches("[a-zA-Z ]+"))){
         System.out.println("Invalid Input(Must be Alphabetic)");
         return;
     }
@@ -38,25 +39,27 @@ public static void uiAddNewMedicine() {
     System.out.print("Enter Dosage: ");
     String dosage = scanner.nextLine().trim();
 
-    if (dosage.isEmpty()) {
-        System.out.println("Invalid Dosage: cannot be empty");
-        return;
-    }
+        if (dosage.isEmpty()) {
+            System.out.println("Invalid Dosage: cannot be empty");
+            return;
+        }
 
-    // Regex: capture integer part and optional unit (letters)
-    if (!dosage.matches("^-?\\d+\\s*[a-zA-Z]*$")) {
-        System.out.println("Dosage must start with an integer (units optional)");
-        return;
-    }
+        // New Regex: A simpler check to ensure the string starts with a number.
+        // It allows for any characters (like '/', letters, spaces) to follow.
+        if (!dosage.matches("^-?\\d+.*$")) {
+            System.out.println("Dosage must start with a number.");
+            return;
+        }
 
-    // Extract just the number part (before any letters)
-    String numberStr = dosage.replaceAll("[^0-9-]", "").trim();
-    int numberPart = Integer.parseInt(numberStr);
+        // New Extraction: Extract only the first sequence of digits.
+        // This splits the string at the first non-digit character and takes the first part.
+        String numberStr = dosage.split("[^\\d-]")[0];
+        int numberPart = Integer.parseInt(numberStr);
 
-    if (numberPart < 1 || numberPart > 2000) {
-        System.out.println("Invalid Dosage amount (must be between 1-2000)");
-        return;
-    }
+        if (numberPart < 1 || numberPart > 2000) {
+            System.out.println("Invalid Dosage amount (must be between 1-2000)");
+            return;
+        }
 
 
 
@@ -248,6 +251,7 @@ public static void uiAddNewMedicine() {
                         int addIndex = Inventory.searchMed(addMedName);
                         if (addIndex == -1) {
                             System.out.println("Medicine not found");
+                            break;
                         }
                         if (addIndex == 0){
                             break;
