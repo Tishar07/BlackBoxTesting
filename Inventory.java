@@ -139,14 +139,14 @@ public class Inventory {
             System.out.println("Invalid Medicine name: must be 1-25 characters long");
             return 0; 
         }
-        if (!medName.matches("[a-zA-Z]+")) {
-            System.out.println("Invalid input (must be alphabetic)");
-            return 0; 
-        }
         for (int i = 0; i < MedList.size(); i++) {
             if (MedList.get(i).getMedName().equalsIgnoreCase(medName)) {
                 return i; 
             }
+        }
+        if (!medName.matches("[a-zA-Z]+")) {
+            System.out.println("Invalid input (must be alphabetic)");
+            return 0; 
         }
         return -1; 
     }

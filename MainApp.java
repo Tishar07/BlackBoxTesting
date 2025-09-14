@@ -248,7 +248,11 @@ public static void uiAddNewMedicine() {
                         int addIndex = Inventory.searchMed(addMedName);
                         if (addIndex == -1) {
                             System.out.println("Medicine not found");
-                        } else {
+                        }
+                        if (addIndex == 0){
+                            break;
+                        }
+                        else {
                             Medicine med = Inventory.MedList.get(addIndex);
                             System.out.println("Available : " + med.getQuantity() + " units");
                             System.out.print("Enter Amount to Add: ");
