@@ -11,6 +11,8 @@ public class MainApp {
 public static void uiAddNewMedicine() {
     System.out.println("Enter the details for the new medicine");
 
+
+    //Medicine Type
     System.out.print("Enter Medicine Type: ");
     String medType = scanner.nextLine().trim().toLowerCase();
     if (!(medType.equalsIgnoreCase("analgesics") || medType.equalsIgnoreCase("antibiotic") ||
@@ -27,14 +29,14 @@ public static void uiAddNewMedicine() {
 
     if (!(medName.matches("[a-zA-Z ]+"))){
         System.out.println("Invalid Input(Must be Alphabetic)");
+        // Returns to Main Menu
         return;
     }
-    if (medName.isEmpty() || medName.length() > 25) {
+    else if (medName.isEmpty() || medName.length() > 25) {
         System.out.println("Invalid Medicine name: must be 1-25 characters long");
         return;
     }
     
-
     // Dosage
     System.out.print("Enter Dosage: ");
     String dosage = scanner.nextLine().trim();
@@ -43,19 +45,13 @@ public static void uiAddNewMedicine() {
             System.out.println("Invalid Dosage: cannot be empty");
             return;
         }
-
-        // New Regex: A simpler check to ensure the string starts with a number.
-        // It allows for any characters (like '/', letters, spaces) to follow.
-        if (!dosage.matches("^-?\\d+.*$")) {
+        else if (!dosage.matches("^-?\\d+.*$")) {
             System.out.println("Dosage must start with a number.");
             return;
         }
 
-        // New Extraction: Extract only the first sequence of digits.
-        // This splits the string at the first non-digit character and takes the first part.
         String numberStr = dosage.split("[^\\d-]")[0];
         int numberPart = Integer.parseInt(numberStr);
-
         if (numberPart < 1 || numberPart > 2000) {
             System.out.println("Invalid Dosage amount (must be between 1-2000)");
             return;
@@ -71,10 +67,11 @@ public static void uiAddNewMedicine() {
         System.out.println("Invalid Manufacturer: must be 1-20 characters long");
         return;
     }
-    if (!(manufacturer.matches("[a-zA-Z]+"))){
+    else if (!(manufacturer.matches("[a-zA-Z]+"))){
         System.out.println("Invalid type , Alphabetics Only !");
         return;
     }
+
 
     // Expiry Date
     System.out.print("Enter Expiry Date (yyyy-MM-dd): ");
