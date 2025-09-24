@@ -24,12 +24,17 @@ public class MainApp {
         while (correct==false) {
             System.out.print("Enter Medicine Type: ");
             medType = scanner.nextLine().trim().toLowerCase();
+
+
             if (!(medType.equalsIgnoreCase("analgesics") || medType.equalsIgnoreCase("antibiotic") ||
                 medType.equalsIgnoreCase("drops") || medType.equalsIgnoreCase("inhaler") ||
                 medType.equalsIgnoreCase("injection") || medType.equalsIgnoreCase("overthecounter")))
 
                 {
                     System.out.println("Invalid Type !");
+
+
+
                 }else{
 
                     correct = true;
@@ -38,22 +43,25 @@ public class MainApp {
 
         
         // Medicine Name
-        correct=false;
+        correct = false;
         while (correct==false) {
             System.out.print("Enter Medicine Name: ");
             medName = scanner.nextLine().trim();
-            if (!(medName.matches("[a-zA-Z ]+"))){
-                System.out.println("Invalid Input(Must be Alphabetic)");
 
-            }
-            else if (medName.isEmpty() || medName.length() > 25) {
+            if (medName.isEmpty() || medName.length() > 25) {
                 System.out.println("Invalid Medicine name: must be 1-25 characters long");
-                
-            }else{
-                correct = true;
+            }
+
+            
+            else if (!medName.matches("[a-zA-Z ]+")) {
+                System.out.println("Invalid Input (Must be Alphabetic)");
+            }
+            
+            
+            else {
+                correct = true; 
             }
         }
-    
         
         // Dosage
         correct = false;
