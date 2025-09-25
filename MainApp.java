@@ -69,14 +69,20 @@ public class MainApp {
         while (correct == false) {
             System.out.print("Enter Dosage: ");
             dosage = scanner.nextLine().trim();
+
+
             if (dosage.isEmpty()) {
                 System.out.println("Invalid Dosage: cannot be empty");
                 continue; 
             }
+
+
             else if (!dosage.matches("^-?\\d+.*$")) {
                 System.out.println("Dosage must start with a number.");
                 continue; 
             }
+
+
             String numberStr = dosage.split("[^\\d-]")[0];
             int numberPart;
             try {
@@ -85,10 +91,13 @@ public class MainApp {
                 System.out.println("Invalid number format.");
                 continue; 
             }
+
+
             if (numberPart < 1 || numberPart > 2000) {
                 System.out.println("Invalid Dosage amount (must be between 1-2000)");
                 continue; 
             }
+
             correct = true;
         }
 
@@ -103,9 +112,12 @@ public class MainApp {
                 System.out.println("Invalid Manufacturer: must be 1-20 characters long");
             }
 
+
             else if (!(manufacturer.matches("[a-zA-Z]+"))){
                 System.out.println("Invalid type , Alphabetics Only !");
+
             
+                
             }else{
                 correct=true;
             }  
@@ -117,13 +129,18 @@ public class MainApp {
             System.out.print("Enter Expiry Date (yyyy-MM-dd): ");
             expDate = scanner.nextLine().trim();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
             try {
+                
                 LocalDate date = LocalDate.parse(expDate, formatter);
                 if (date.isBefore(LocalDate.now())) {
                     System.out.println("Expiry date cannot be in the past.");
+                
+                
                 }else{
                    correct = true; 
                 }
+            
             } catch (DateTimeParseException e) {
                 System.out.println("Invalid date. Please enter a real calendar date in yyyy-MM-dd format.");
             }
@@ -138,13 +155,18 @@ public class MainApp {
         while (correct==false){
             System.out.print("Enter Quantity: ");
             quantityStr = scanner.nextLine().trim();
+
             try {
                 quantity = Integer.parseInt(quantityStr);
                 if (quantity <= 0 || quantity > 10000) {
                     System.out.println("Invalid Quantity: must be between 1 and 10000");
+
+
                 }else{
                     correct = true;
                 }
+
+
             } catch (NumberFormatException e) {
                 System.out.println("Invalid Quantity: not a valid integer");
             }
@@ -207,9 +229,6 @@ public class MainApp {
                     correct = true;
                     break;
 
-                default:
-                    System.out.println("Invalid medicine type.");
-                    break;
             }
         }
 
